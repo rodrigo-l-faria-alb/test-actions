@@ -19,4 +19,4 @@ jobs:
           #package-version-ids: '27014883'
           #1keep: 2
           #1names: 'test-actions/my-package'
-          package-name: 'test-actions'
+          package-name: 'test-actions/my-package'
