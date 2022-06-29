@@ -10,13 +10,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Delete Package Versions
-        #uses: actions/delete-package-versions@v3
-        #1uses: smartsquaregmbh/delete-old-packages@v0.4.0    
-        uses: windyakin/delete-package-versions-keep-latest@v1
+        uses: actions/delete-package-versions@v3
+        #1uses: smartsquaregmbh/delete-old-packages@v0.4.0
         with:
-          #package-name: 'test-actions'
-          #min-versions-to-keep: 2
+          package-name: "test-actions"
+          min-versions-to-keep: 2
+          token: ${{ secrets.MY_GITHUB_PAT }}
           #package-version-ids: '27014883'
           #1keep: 2
           #1names: 'test-actions/my-package'
-          package-name: 'test-actions/my-package'
