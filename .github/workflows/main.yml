@@ -1,7 +1,9 @@
 name: Delete Package
+
 on:
-   schedule:
-    - cron:  '0/5 * * * *'
+  push:
+    branches:    
+      - 'main'
 
 jobs:
   delete-packages:
