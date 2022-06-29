@@ -12,5 +12,5 @@ jobs:
       - name: Delete Package Versions
         uses: actions/delete-package-versions@v2.0.1
         with:
-          package-name: 'my-package'
+          package-name: 'test-actions/my-package'
           min-versions-to-keep: 2
