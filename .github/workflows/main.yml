@@ -1,4 +1,4 @@
-name: Delete Package Versions
+name: Delete Package
 on:
   registry_package:
     types: [published]
