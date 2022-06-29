@@ -11,10 +11,12 @@ jobs:
     steps:
       - name: Delete Package Versions
         #uses: actions/delete-package-versions@v3
-        uses: smartsquaregmbh/delete-old-packages@v0.4.0    
+        #1uses: smartsquaregmbh/delete-old-packages@v0.4.0    
+        uses: windyakin/delete-package-versions-keep-latest@v1
         with:
           #package-name: 'test-actions'
           #min-versions-to-keep: 2
           #package-version-ids: '27014883'
-          keep: 2
-          names: 'test-actions/my-package'
+          #1keep: 2
+          #1names: 'test-actions/my-package'
+          package-name: 'test-actions'
