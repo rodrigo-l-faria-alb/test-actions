@@ -10,8 +10,11 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Delete Package Versions
-        uses: actions/delete-package-versions@v3
+        #uses: actions/delete-package-versions@v3
+        uses: smartsquaregmbh/delete-old-packages@v0.4.0    
         with:
           #package-name: 'test-actions'
           #min-versions-to-keep: 2
-          package-version-ids: '27014883'
+          #package-version-ids: '27014883'
+          keep: 2
+          names: 'my-package'
