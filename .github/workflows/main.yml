@@ -10,7 +10,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Delete Package Versions
-        uses: actions/delete-package-versions@v2.0.1
+        uses: actions/delete-package-versions@v3.0.0
         with:
           #package-name: 'test-actions/my-package/1.0.0-01'
           package-version-ids: '776fc32788d319530ddea3e4b79f84194f5bf8e4ff20ded51c56f0533c5a344b'
