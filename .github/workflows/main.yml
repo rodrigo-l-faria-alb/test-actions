@@ -15,7 +15,7 @@ jobs:
         with:
           package-name: "test-actions/my-package"
           min-versions-to-keep: 2
-          token: ${{ secrets.MY_GITHUB_PAT }}
+          #token: ${{ secrets.MY_GITHUB_PAT }}
           #package-version-ids: '27014883'
           #1keep: 2
           #1names: 'test-actions/my-package'
