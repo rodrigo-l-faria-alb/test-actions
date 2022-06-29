@@ -1,7 +1,7 @@
 name: Delete Package Versions
 on:
    schedule:
-    - cron:  '23 12 * * *'
+    - cron:  '30 12 * * *'
 
 jobs:
   delete-packages:
