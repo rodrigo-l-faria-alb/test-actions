@@ -1,7 +1,7 @@
 name: Delete Package Versions
 on:
-   schedule:
-    - cron:  '30 12 * * *'
+  registry_package:
+    types: [published]
 
 jobs:
   delete-packages:
