@@ -1,4 +1,14 @@
-- name: Delete Package Versions
-  uses: actions/delete-package-versions@v2.0.1
-  with:
-    num-old-versions-to-delete: 2
+name: Delete Package Versions
+on:
+   schedule:
+    - cron:  '0 0 * * *'
+
+jobs:
+  delete-packages:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Delete Package Versions
+        uses: actions/delete-package-versions@v2.0.1
+        with:
+          num-old-versions-to-delete: 2
+          
