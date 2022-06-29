@@ -13,9 +13,9 @@ jobs:
         uses: actions/delete-package-versions@v3
         #1uses: smartsquaregmbh/delete-old-packages@v0.4.0
         with:
-          package-name: "test-actions/my-package"
-          min-versions-to-keep: 2
+          #package-name: "test-actions/my-package"
+          #min-versions-to-keep: 2
           #token: ${{ secrets.MY_GITHUB_PAT }}
-          #package-version-ids: '27014883'
+          package-version-ids: 26992874
           #1keep: 2
           #1names: 'test-actions/my-package'
