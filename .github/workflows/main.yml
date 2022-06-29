@@ -17,4 +17,4 @@ jobs:
           #min-versions-to-keep: 2
           #package-version-ids: '27014883'
           keep: 2
-          names: 'my-package'
+          names: 'test-actions/my-package'
