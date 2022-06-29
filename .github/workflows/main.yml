@@ -1,4 +1,4 @@
-name: Delete Package v1
+name: Delete Package v2
 
 on:
   push:
