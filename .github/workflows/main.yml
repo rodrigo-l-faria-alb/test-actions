@@ -15,15 +15,15 @@ jobs:
           #curl -H "Accept:application/vnd.github.v3+json" -H "Authorization:token ${MY_GITHUB_PAT}" https://api.github.com/users/rodrigolfaria/packages/container/test-actions/versions -o /tmp/response.json
           #numberOfVersion=`cat /tmp/response.json | grep -c id`
           
-          #if [ $numberOfVersion -gt 2 ]
-          #  then
-          #     idsToDelete=`cat /tmp/response.json | jq '.[2:4]' | jq '.[] | .id'`
-
+          if [ $numberOfVersion -gt 2 ]
+            then
+               idsToDelete=`cat /tmp/response.json | jq '.[2:4]' | jq '.[] | .id'`
+               echo $idsToDelete
           #     for id in $idsToDelete; do
           #        urlToDelete=https://api.github.com/users/rodrigolfaria/packages/container/test-actions/versions/$id
           #        curl -X DELETE -H "Accept:application/vnd.github.v3+json" -H "Authorization:token ${MY_GITHUB_PAT}" $urlToDelete
           #     done
-          #fi
+          fi
 
           echo 'End'
         shell: bash
