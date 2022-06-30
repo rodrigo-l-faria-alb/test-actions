@@ -12,7 +12,7 @@ jobs:
       - name: Delete Package Versions
         run:
           echo 'Retrieving versions of package'
-          curl -H "Accept: application/vnd.github.v3+json" -H "Authorization: token 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" https://api.github.com/users/rodrigolfaria/packages/container/test-actions/versions -o /tmp/response.json
+          curl -H "Accept:application/vnd.github.v3+json" -H "Authorization:token ${MY_GITHUB_PAT}" https://api.github.com/users/rodrigolfaria/packages/container/test-actions/versions -o /tmp/response.json
           numberOfVersion=`cat /tmp/response.json | grep -c id`
           
           if [ $numberOfVersion -gt 2 ]
@@ -21,7 +21,7 @@ jobs:
 
                for id in $idsToDelete; do
                   urlToDelete=https://api.github.com/users/rodrigolfaria/packages/container/test-actions/versions/$id
-                  curl -X DELETE -H "Accept: application/vnd.github.v3+json" -H "Authorization: token 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" $urlToDelete
+                  curl -X DELETE -H "Accept:application/vnd.github.v3+json" -H "Authorization:token ${MY_GITHUB_PAT}" $urlToDelete
                done
           fi
 
