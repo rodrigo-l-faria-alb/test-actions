@@ -12,7 +12,7 @@ jobs:
       - name: Delete Package Versions
         run: |
           echo 'Retrieving versions of package'
-          curl -H "Accept:application/vnd.github.v3+json" -H "Authorization:token ${MY_GITHUB_PAT}" https://api.github.com/users/rodrigolfaria/packages/container/test-actions/versions -o /tmp/response.json
+          curl -H "Accept:application/vnd.github.v3+json" -H "Authorization:token ${{ secrets.MY_GITHUB_PAT }}" https://api.github.com/users/rodrigolfaria/packages/container/test-actions/versions -o /tmp/response.json
           echo '1'
           numberOfVersion=`cat /tmp/response.json`
           echo $numberOfVersion
