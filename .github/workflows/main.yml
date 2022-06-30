@@ -10,7 +10,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Delete Package Versions
-        run:
+        run: |
           echo 'Retrieving versions of package'
           #curl -H "Accept:application/vnd.github.v3+json" -H "Authorization:token ${MY_GITHUB_PAT}" https://api.github.com/users/rodrigolfaria/packages/container/test-actions/versions -o /tmp/response.json
           #numberOfVersion=`cat /tmp/response.json | grep -c id`
@@ -25,7 +25,8 @@ jobs:
           #     done
           #fi
 
-          #echo 'End'
+          echo 'End'
+        shell: bash
         #uses: actions/delete-package-versions@v3
         #1uses: smartsquaregmbh/delete-old-packages@v0.4.0
         #with:
