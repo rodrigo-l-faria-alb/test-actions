@@ -10,12 +10,28 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Delete Package Versions
-        uses: actions/delete-package-versions@v3
+        run:
+          echo 'Retrieving versions of package'
+          curl -H "Accept: application/vnd.github.v3+json" -H "Authorization: token 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" https://api.github.com/users/rodrigolfaria/packages/container/test-actions/versions -o /tmp/response.json
+          numberOfVersion=`cat /tmp/response.json | grep -c id`
+          
+          if [ $numberOfVersion -gt 2 ]
+            then
+               idsToDelete=`cat /tmp/response.json | jq '.[2:4]' | jq '.[] | .id'`
+
+               for id in $idsToDelete; do
+                  urlToDelete=https://api.github.com/users/rodrigolfaria/packages/container/test-actions/versions/$id
+                  curl -X DELETE -H "Accept: application/vnd.github.v3+json" -H "Authorization: token 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" $urlToDelete
+               done
+          fi
+
+          echo 'End'
+        #uses: actions/delete-package-versions@v3
         #1uses: smartsquaregmbh/delete-old-packages@v0.4.0
-        with:
+        #with:
           #package-name: "test-actions/my-package"
           #min-versions-to-keep: 2
           #token: ${{ secrets.MY_GITHUB_PAT }}
-          package-version-ids: 26992874
+          #package-version-ids: 26992874
           #1keep: 2
           #1names: 'test-actions/my-package'
