@@ -11,22 +11,23 @@ jobs:
     steps:
       - name: Delete Package Versions
         run: |
-          echo 'Retrieving versions of package'
+          echo 'Starting retrieving versions of package'
           curl -H "Accept:application/vnd.github.v3+json" -H "Authorization:token ${{ secrets.MY_GITHUB_PAT }}" https://api.github.com/users/rodrigolfaria/packages/container/test-actions/versions -o /tmp/response.json
           numberOfVersion=`cat /tmp/response.json | grep -c id`
-          echo '2'
+          echo `Number of versions: $numberOfVersion`
+
           if [ $numberOfVersion -gt 2 ]
             then
-               echo '3'
                idsToDelete=`cat /tmp/response.json | jq '.[2:]' | jq '.[] | .id'`
-               echo $idsToDelete
-          #     for id in $idsToDelete; do
-          #        urlToDelete=https://api.github.com/users/rodrigolfaria/packages/container/test-actions/versions/$id
-          #        curl -X DELETE -H "Accept:application/vnd.github.v3+json" -H "Authorization:token ${MY_GITHUB_PAT}" $urlToDelete
-          #     done
+
+               for packageVersionId in $idsToDelete; do
+                  echo `Calling URL to delete package with id: ${packageVersionId}`
+                  urlToDelete=https://api.github.com/users/rodrigolfaria/packages/container/test-actions/versions/$packageVersionId
+                  curl -X DELETE -H "Accept:application/vnd.github.v3+json" -H "Authorization:token ${MY_GITHUB_PAT}" $urlToDelete
+               done
           fi
 
-          echo 'End'
+          echo 'Finish execution'
         shell: bash
         #uses: actions/delete-package-versions@v3
         #1uses: smartsquaregmbh/delete-old-packages@v0.4.0
