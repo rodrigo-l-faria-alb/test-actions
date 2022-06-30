@@ -16,6 +16,7 @@ jobs:
           echo '1'
           numberOfVersion=`cat /tmp/response.json`
           echo $numberOfVersion
+          echo $MY_GITHUB_PAT
           #numberOfVersion=`cat /tmp/response.json | grep -c id`
           echo '2'
           #if [ $numberOfVersion -gt 2 ]
