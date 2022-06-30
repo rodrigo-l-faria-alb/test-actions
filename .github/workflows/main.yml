@@ -14,7 +14,7 @@ jobs:
           echo 'Retrieving versions of package'
           curl -H "Accept:application/vnd.github.v3+json" -H "Authorization:token ${MY_GITHUB_PAT}" https://api.github.com/users/rodrigolfaria/packages/container/test-actions/versions -o /tmp/response.json
           echo '1'
-          numberOfVersion=`cat /tmp/response.json | grep -c id`
+          numberOfVersion=`cat /tmp/response.json`
           #numberOfVersion=`cat /tmp/response.json | grep -c id`
           echo '2'
           #if [ $numberOfVersion -gt 2 ]
