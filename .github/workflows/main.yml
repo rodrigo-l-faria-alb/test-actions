@@ -18,7 +18,7 @@ jobs:
           if [ $numberOfVersion -gt 2 ]
             then
                echo '3'
-               idsToDelete=`cat /tmp/response.json | jq '.[2:4]' | jq '.[] | .id'`
+               idsToDelete=`cat /tmp/response.json | jq '.[2:]' | jq '.[] | .id'`
                echo $idsToDelete
           #     for id in $idsToDelete; do
           #        urlToDelete=https://api.github.com/users/rodrigolfaria/packages/container/test-actions/versions/$id
