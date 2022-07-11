@@ -12,29 +12,20 @@ jobs:
       - name: Delete Package Versions
         run: |
           echo 'Starting retrieving versions of package'
-          curl -H "Accept:application/vnd.github.v3+json" -H "Authorization:token ${{ secrets.MY_GITHUB_PAT }}" https://api.github.com/users/rodrigolfaria/packages/container/test-actions/versions -o /tmp/response.json
-          numberOfVersion=`cat /tmp/response.json | grep -c id`
-          echo `Number of versions: $numberOfVersion`
+          curl -s -H "Accept:application/vnd.github.v3+json" -H "Authorization:token ${{ secrets.MY_GITHUB_PAT }}" https://api.github.com/users/rodrigolfaria/packages/container/test-actions/versions -o /tmp/response.json
+          packagesId=`cat /tmp/response.json | jq '.[] | .id'`
 
-          if [ $numberOfVersion -gt 2 ]
-            then
-               idsToDelete=`cat /tmp/response.json | jq '.[2:]' | jq '.[] | .id'`
+          for packageId in $packagesId; do
+            packageDetailUrl=https://api.github.com/users/rodrigolfaria/packages/container/test-actions/versions/$packageId
+            curl -s -H "Accept: application/vnd.github.v3+json" -H "Authorization: token ${{ secrets.MY_GITHUB_PAT }}" $packageDetailUrl -o /tmp/response.json
+            tagName=`cat /tmp/response.json | jq '.metadata.container.tags' | jq '.[]'`
 
-               for packageVersionId in $idsToDelete; do
-                  echo `Calling URL to delete package with id: ${packageVersionId}`
-                  urlToDelete=https://api.github.com/users/rodrigolfaria/packages/container/test-actions/versions/$packageVersionId
-                  curl -X DELETE -H "Accept:application/vnd.github.v3+json" -H "Authorization:token ${{ secrets.MY_GITHUB_PAT }}" $urlToDelete
-               done
-          fi
-
+            if [[ $tagName =~ [0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}-r* ]]
+              then
+                echo "Deleting item with id: ${packageId} and tag name: ${tagName}"
+                urlToDelete=https://api.github.com/users/rodrigolfaria/packages/container/test-actions/versions/$packageId
+                curl -X DELETE -H "Accept:application/vnd.github.v3+json" -H "Authorization:token ${{ secrets.MY_GITHUB_PAT }}" $urlToDelete
+            fi
+          done
           echo 'Finish execution'
         shell: bash
-        #uses: actions/delete-package-versions@v3
-        #1uses: smartsquaregmbh/delete-old-packages@v0.4.0
-        #with:
-          #package-name: "test-actions/my-package"
-          #min-versions-to-keep: 2
-          #token: ${{ secrets.MY_GITHUB_PAT }}
-          #package-version-ids: 26992874
-          #1keep: 2
-          #1names: 'test-actions/my-package'
