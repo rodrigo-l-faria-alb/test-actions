@@ -24,7 +24,7 @@ jobs:
               then
                 echo "Deleting item with id: ${packageId} and tag name: ${tagName}"
                 urlToDelete=https://api.github.com/users/rodrigolfaria/packages/container/test-actions/versions/$packageId
-                curl -X DELETE -H "Accept:application/vnd.github.v3+json" -H "Authorization:token ${{ secrets.MY_GITHUB_PAT }}" $urlToDelete
+                curl -s -X DELETE -H "Accept:application/vnd.github.v3+json" -H "Authorization:token ${{ secrets.MY_GITHUB_PAT }}" $urlToDelete
             fi
           done
           echo 'Finish execution'
