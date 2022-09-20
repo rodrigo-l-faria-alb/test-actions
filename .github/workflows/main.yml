@@ -3,7 +3,7 @@ name: Delete Package v2
 on:
   push:
     branches:    
-      - 'main'
+      - 'main-test'
 
 jobs:
   delete-packages:
