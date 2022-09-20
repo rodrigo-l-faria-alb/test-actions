@@ -1,0 +1,15 @@
+name: Delete Package
+on:
+  push:
+    branches:    
+      - 'main'
+jobs:
+  delete-packages:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Delete Package Versions
+        uses: actions/delete-package-versions@v3
+        with:
+          package-name: 'test-actions'
+          min-versions-to-keep: 2
+          token: ${{ secrets.MY_GITHUB_PAT }}
