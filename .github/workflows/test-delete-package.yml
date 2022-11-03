@@ -10,6 +10,6 @@ jobs:
       - name: Delete Package Versions
         uses: actions/delete-package-versions@v3
         with:
-          package-name: 'test-actions/my-package'
+          package-name: 'test-actions'
           min-versions-to-keep: 2
-          token: ${{ secrets.MY_GITHUB_PAT2 }}
+          #token: ${{ secrets.MY_GITHUB_PAT2 }}
