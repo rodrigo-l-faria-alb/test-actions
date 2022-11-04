@@ -11,7 +11,7 @@ jobs:
         uses: snok/container-retention-policy@v1
         with:
           image-names: test-actions
-          cut-off: one day ago UTC
+          cut-off: one minute ago UTC
           timestamp-to-use: updated_at
           #keep-at-least: 10
           filter-tags: '24.0.0-r*'
