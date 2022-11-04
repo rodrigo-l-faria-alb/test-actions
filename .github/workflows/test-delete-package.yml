@@ -2,7 +2,7 @@ name: Delete Package
 on:
   push:
     branches:    
-      - 'main'
+      - 'main-tes2'
 jobs:
   delete-packages:
     runs-on: ubuntu-latest
