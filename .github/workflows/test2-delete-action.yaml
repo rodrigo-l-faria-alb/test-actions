@@ -14,6 +14,6 @@ jobs:
           cut-off: one minute ago UTC
           timestamp-to-use: updated_at
           #keep-at-least: 10
-          filter-tags: '24.0.0-r*'
+          filter-tags: '24.0.0-r31ccfe7-20220810111*'
           account-type: personal
           token: ${{ secrets.MY_GITHUB_PAT2 }}
