@@ -13,6 +13,7 @@ jobs:
           image-names: test-actions
           cut-off: one day ago UTC
           timestamp-to-use: updated_at
-          keep-at-least: 1
+          #keep-at-least: 10
+          filter-tags: '*-r*-*'
           account-type: personal
           token: ${{ secrets.MY_GITHUB_PAT2 }}
