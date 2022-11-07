@@ -15,6 +15,6 @@ jobs:
           timestamp-to-use: created_at
           # keep-at-least: 10
           #filter-tags: '23.0.0-r31ccfe7-202208101110'
-          filter-tags: '*-r*'
+          filter-tags: '25.0.0'
           account-type: personal
           token: ${{ secrets.MY_GITHUB_PAT2 }}
