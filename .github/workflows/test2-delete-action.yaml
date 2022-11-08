@@ -9,6 +9,8 @@ jobs:
     steps:
       - name: Delete Package Versions 2
         uses: snok/container-retention-policy@v1.4.2
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
         with:
           image-names: test-actions
           cut-off: one minute ago UTC
@@ -18,4 +20,4 @@ jobs:
           filter-tags: '24.0.0'
           account-type: personal
           #token: ${{ secrets.MY_GITHUB_PAT2 }}
-          token: ${{ secrets.GITHUB_TOKEN }}
+          token: ${{ GITHUB_TOKEN }}
