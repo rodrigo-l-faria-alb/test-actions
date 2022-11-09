@@ -10,7 +10,7 @@ jobs:
       - name: Delete Package Versions 2
         run: |
           echo 'Starting retrieving versions of package'
-          curl -s -H "Accept:application/vnd.github.v3+json" -H "Authorization:token ${{ GITHUB_TOKEN }}" https://api.github.com/users/rodrigolfaria/packages/container/test-actions/versions -o /tmp/response.json
+          curl -s -H "Accept:application/vnd.github.v3+json" -H "Authorization:token ${{ secrets.GITHUB_TOKEN }}" https://api.github.com/users/rodrigolfaria/packages/container/test-actions/versions -o /tmp/response.json
           packagesId=`cat /tmp/response.json | jq '.[] | .id'`
           echo "packagesId: ${packagesId}"
         #uses: snok/container-retention-policy@v1.4.2
