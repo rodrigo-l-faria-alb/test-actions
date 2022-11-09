@@ -12,7 +12,7 @@ jobs:
           echo 'Starting retrieving versions of package'
           curl -s -H "Accept:application/vnd.github.v3+json" -H "Authorization:token ${{ secrets.GITHUB_TOKEN }}" https://api.github.com/users/rodrigolfaria/packages/container/test-actions/versions -o /tmp/response.json
           packagesId=`cat /tmp/response.json | jq '.[] | .id'`
-          echo "Testing get token: ${secrets.GITHUB_TOKEN} and packagesId: ${packagesId}"
+          echo "packagesId: ${packagesId}"
         #uses: snok/container-retention-policy@v1.4.2
         #with:
         #  image-names: test-actions
