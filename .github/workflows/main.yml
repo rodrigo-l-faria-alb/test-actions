@@ -14,6 +14,9 @@ jobs:
           echo 'Starting retrieving versions of package'
           #curl -s -H "Accept:application/vnd.github.v3+json" -H "Authorization:token ${{ secrets.MY_GITHUB_PAT }}" https://api.github.com/users/rodrigolfaria/packages/container/test-actions/versions -o /tmp/response.json
           curl -s -H "Accept:application/vnd.github.v3+json" -H "Authorization:token ${{ secrets.GITHUB_TOKEN }}" https://api.github.com/orgs/AlticeLabsProjects/packages/container/chomesm%2Fchomesm-engine/versions -o /tmp/response.json
+          echo 'inicio'
+          echo `cat /tmp/response.json`
+          echo 'fim'
           packagesId=`cat /tmp/response.json | jq '.[] | .id'`
 
           for packageId in $packagesId; do
