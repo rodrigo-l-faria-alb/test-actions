@@ -2,7 +2,7 @@ name: Delete Package 2
 on:
   push:
     branches:    
-      - 'main'
+      - 'main-test3'
 jobs:
   delete-packages:
     runs-on: ubuntu-latest
