@@ -22,10 +22,11 @@ jobs:
           for packageId in $packagesId; do
             echo "TEST:: ${packageId}"
             #packageDetailUrl=https://api.github.com/users/rodrigolfaria/packages/container/test-actions/versions/$packageId
-            #curl -s -H "Accept: application/vnd.github.v3+json" -H "Authorization: token ${{ secrets.MY_GITHUB_PAT }}" $packageDetailUrl -o /tmp/response.json
-            #tagName=`cat /tmp/response.json | jq '.metadata.container.tags' | jq '.[]'`
-
-            #if [[ $tagName =~ [0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}-r* ]]
+            packageDetailUrl=https://api.github.com/orgs/AlticeLabsProjects/packages/container/chomesm%2Fchomesm-engine/versions/$packageId
+            curl -s -H "Accept: application/vnd.github.v3+json" -H "Authorization: token ${{ secrets.TESTING_SECRET }}" $packageDetailUrl -o /tmp/response.json
+            tagName=`cat /tmp/response.json | jq '.metadata.container.tags' | jq '.[]'`
+            echo "TEST 2:: ${tagName}"
+            #if [[ $tagName =~ [0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}-r[0-9]{12} ]]
             #  then
             #    echo "Deleting item with id: ${packageId} and tag name: ${tagName}"
             #    urlToDelete=https://api.github.com/users/rodrigolfaria/packages/container/test-actions/versions/$packageId
