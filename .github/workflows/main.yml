@@ -16,24 +16,24 @@ jobs:
           
           for packageName in ${packageNameArray[@]}; do
             echo "Package name: ${packageName}"
+            packageUrl=https://api.github.com/orgs/AlticeLabsProjects/packages/container/${packageName}/versions
 
-            curl -s -H "Accept:application/vnd.github.v3+json" -H "Authorization:token ${{ secrets.RICARDO_SECRET }}" https://api.github.com/orgs/AlticeLabsProjects/packages/container/chomesm%2Fchomesm-engine/versions -o /tmp/response.json
+            curl -s -H "Accept:application/vnd.github.v3+json" -H "Authorization:token ${{ secrets.RICARDO_SECRET }}" ${packageUrl} -o /tmp/response.json
             packagesId=`cat /tmp/response.json | jq '.[] | .id'`
 
             for packageId in $packagesId; do
-              packageDetailUrl=https://api.github.com/orgs/AlticeLabsProjects/packages/container/chomesm%2Fchomesm-engine/versions/$packageId
+              packageDetailUrl=$packageUrl/$packageId
               curl -s -H "Accept: application/vnd.github.v3+json" -H "Authorization: token ${{ secrets.RICARDO_SECRET }}" $packageDetailUrl -o /tmp/response.json
               tagNameArray=`cat /tmp/response.json | jq '.metadata.container.tags'`
-
-              for tagName in $(echo "${tagNameArray}" | jq '.[]'); do
-
-                if [[ ! $tagName =~ [0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}-r[0-9]{12} ]]
-                  then
-                    echo "Deleting item with id: ${packageId} and tag name: ${tagName}"
-                    urlToDelete=https://api.github.com/orgs/AlticeLabsProjects/packages/container/chomesm%2Fchomesm-engine/versions/$packageId
-                    curl -s -X DELETE -H "Accept:application/vnd.github.v3+json" -H "Authorization:token ${{ secrets.RICARDO_SECRET }}" $urlToDelete
-                fi
-              done
+              echo ${packageDetailUrl}
+              #for tagName in $(echo "${tagNameArray}" | jq '.[]'); do
+              #  if [[ ! $tagName =~ [0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}-r[0-9]{12} ]]
+              #    then
+              #      echo "Deleting item with id: ${packageId} and tag name: ${tagName}"
+              #      urlToDelete=https:$packageUrl/$packageId
+              #      curl -s -X DELETE -H "Accept:application/vnd.github.v3+json" -H "Authorization:token ${{ secrets.RICARDO_SECRET }}" $urlToDelete
+              #  fi
+              #done
             done
           done
           echo 'Finish execution'
