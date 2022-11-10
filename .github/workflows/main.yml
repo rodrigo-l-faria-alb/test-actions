@@ -24,7 +24,7 @@ jobs:
             #tagName=`cat /tmp/response.json | jq '.metadata.container.tags' | jq '.[]'`
             #echo "TEST 2:: ${tagName}"
             
-            tagNameArray=`cat /tmp/response.json | jq '.metadata.container.tags'
+            tagNameArray=`cat /tmp/response.json | jq '.metadata.container.tags'`
             echo "RODRIGO 1"
             for tagName in $(echo "${tagNameArray}" | jq '.[]'); do
               echo ${tagName}
