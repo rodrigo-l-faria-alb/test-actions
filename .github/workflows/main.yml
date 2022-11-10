@@ -25,15 +25,14 @@ jobs:
               packageDetailUrl=$packageUrl/$packageId
               curl -s -H "Accept: application/vnd.github.v3+json" -H "Authorization: token ${{ secrets.RICARDO_SECRET }}" $packageDetailUrl -o /tmp/response.json
               tagNameArray=`cat /tmp/response.json | jq '.metadata.container.tags'`
-              echo ${packageDetailUrl}
-              #for tagName in $(echo "${tagNameArray}" | jq '.[]'); do
-              #  if [[ ! $tagName =~ [0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}-r[0-9]{12} ]]
-              #    then
-              #      echo "Deleting item with id: ${packageId} and tag name: ${tagName}"
-              #      urlToDelete=https:$packageUrl/$packageId
-              #      curl -s -X DELETE -H "Accept:application/vnd.github.v3+json" -H "Authorization:token ${{ secrets.RICARDO_SECRET }}" $urlToDelete
-              #  fi
-              #done
+
+              for tagName in $(echo "${tagNameArray}" | jq '.[]'); do
+                if [[ ! $tagName =~ [0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}-r[0-9]{12} ]]
+                  then
+                    echo "Deleting item with id: ${packageId} and tag name: ${tagName}"
+                    curl -s -X DELETE -H "Accept:application/vnd.github.v3+json" -H "Authorization:token ${{ secrets.RICARDO_SECRET }}" $packageDetailUrl
+                fi
+              done
             done
           done
           echo 'Finish execution'
