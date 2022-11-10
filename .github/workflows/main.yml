@@ -28,16 +28,15 @@ jobs:
             echo "RODRIGO 1"
             for tagName in $(echo "${tagNameArray}" | jq '.[]'); do
               echo ${tagName}
+              if [[ ! $tagName =~ [0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}-r[0-9]{12} ]]
+                then
+                  echo "ENTREI NO IF"
+                  echo "Deleting item with id: ${packageId} and tag name: ${tagName}"
+                  urlToDelete=https://api.github.com/orgs/AlticeLabsProjects/packages/container/chomesm%2Fchomesm-engine/versions/$packageId
+                  curl -s -X DELETE -H "Accept:application/vnd.github.v3+json" -H "Authorization:token ${{ secrets.RICARDO_SECRET }}" $urlToDelete
+              fi
             done
             echo "RODRIGO 2"
-            
-            #if [[ ! $tagName =~ [0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}-r[0-9]{12} ]]
-            #  then
-            #    echo "ENTREI NO IF"
-            #    echo "Deleting item with id: ${packageId} and tag name: ${tagName}"
-            #    urlToDelete=https://api.github.com/orgs/AlticeLabsProjects/packages/container/chomesm%2Fchomesm-engine/versions/$packageId
-            #    curl -s -X DELETE -H "Accept:application/vnd.github.v3+json" -H "Authorization:token ${{ secrets.RICARDO_SECRET }}" $urlToDelete
-            #fi
           done
           echo 'Finish execution'
         shell: bash
