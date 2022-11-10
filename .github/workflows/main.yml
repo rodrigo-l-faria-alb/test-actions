@@ -22,7 +22,7 @@ jobs:
             packageDetailUrl=https://api.github.com/orgs/AlticeLabsProjects/packages/container/chomesm%2Fchomesm-engine/versions/$packageId
             curl -s -H "Accept: application/vnd.github.v3+json" -H "Authorization: token ${{ secrets.RICARDO_SECRET }}" $packageDetailUrl -o /tmp/response.json
             #tagName=`cat /tmp/response.json | jq '.metadata.container.tags' | jq '.[]'`
-            echo "TEST 2:: ${tagName}"
+            #echo "TEST 2:: ${tagName}"
             
             tagNameArray=`cat /tmp/response.json | jq '.metadata.container.tags'
             echo "RODRIGO 1"
